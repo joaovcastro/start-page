@@ -9,21 +9,105 @@
   <body>
     <div class="container">
 
+      <!-- First row contains soundcloud player and weather info -->
+      <div class="row first-row">
+
+
+        <!-- Soundcloud Widget -->
+        <div class="soundcloud-widget col-lg-2" ng-controller="playerController">
+          <button type="button" class="btn player-button" ng-click="previous()"> <i class="fa fa-step-backward" aria-hidden="true"></i> </button>
+          <button type="button" class="btn player-button middle-button" ng-click="play()"> <i class="fa fa-play play-btn" aria-hidden="true"></i> </button>
+          <button type="button" class="btn player-button" ng-click="next()"> <i class="fa fa-step-forward" aria-hidden="true"></i> </button>
+          <a href="{{url}}" target="_blank" >
+            <p href="{{url}}" target="_blank" class="music-info"> {{artist}} <br> {{song}} </p>
+          </a>
+          <iframe hidden id='soundcloud_widget' width='100%' height='450' scrolling='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/205894143&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false' frameborder='no' ></iframe>
+        </div>
+
+        <!-- Weather -->
+        <div class="weather-info col-lg-1 col-lg-offset-11" ng-controller="weatherController">
+          <a data-toggle="modal" data-target="#weather-complete">
+            <i class="owf owf-{{weatherInfo.weather[0].id}}"></i>
+            <p> {{weatherInfo.main.temp - 272.15 | number : 0}}ºC
+            <br> {{weatherInfo.weather[0].description}} </p>
+          </a>
+        </div>
+
+      </div>
+
+
+
       <!-- Second row contains Time and Date -->
-     <div class="row">
-       <div class="datetime col-lg-6 col-lg-offset-3">
-         <div ng-controller="dateTimeController">
-           <h1 class="time"> {{date.raw | date:'HH:mm:ss'}} </h1>
-           <h3 class="date"> {{date.raw | date:' EEEE,  MMMM dd'}}
-         </div>
+     <div class="row datetime col-lg-6 col-lg-offset-3">
+       <div ng-controller="dateTimeController">
+         <h1 class="time"> {{date.raw | date:'HH:mm:ss'}} </h1>
+         <h3 class="date"> {{date.raw | date:' EEEE,  MMMM dd'}}
        </div>
      </div>
 
 
+     <!-- Full Weather Info -->
+    <div class="modal fade" id="weather-complete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="weatherController">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <center>   <h4 class="modal-title" id="myModalLabel">Weather in {{city}}</h4> </center>
+          </div>
+          <div class="modal-body">
+            <p>
+              <b> Ground level: </b> {{groundLevel}} hPa     <br>
+              <b>Humidity:</b>     {{humidity}}%         <br>
+              <b>Pressure:</b>     {{pressure}} hPa        <br>
+              <b>Sea level:</b>    {{sea_level}} hPa        <br>
+              <b>Current Temp:</b> {{temp - 272.15 | number : 0}}ºC             <br>
+              <b>Max Temp:</b>     {{temp_max - 272.15 | number : 0}}  ºC         <br>
+              <b>Min Temp:</b>     {{temp_min - 272.15 | number : 0}} ºC
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Todo List -->
+      <div class="col-lg-3 todo-list" ng-controller="todoController">
+        <span class="todo-items" ng-repeat="todo in todoList track by $index">
+          <ul>
+            <li style="margin-left: -14%;">
+              <button  class="btn btn-default todo-remove" ng-click="removeFromList(todo.task)"> | x | </button>
+              {{todo.task}}
+            </li>
+          </ul>
+        </span>
+        <form>
+          <button type="submit" class="btn btn-default todo-add" ng-click="addToList(todoTask)"> + </button>
+          <input type="text" id="todoInput" ng-model="todoTask" class="todo-input" placeholder="To do" onfocus="this.placeholder = ''"> </input>
+        </form>
+      </div>
+      
+      <!-- Google Search -->
+      <div class="col-lg-3 col-lg-offset-6 google-search" ng-controller="searchController">
+        <form>
+          <input type="text" ng-model="query" class="todo-input" > </input>
+          <button type="submit" class="btn btn-default todo-add" ng-click="search(query)">
+            <i class="fa fa-google" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+
     </div>
     <script src="./js/vendor/angular.min.js"></script>
-    <script src="./js/vendor/angular-route.min.js"></script>
+    <script src="./js/vendor/angular-route.min.js"></script
+    <script src="./js/vendor/bootstrap.min.js"></script>
     <script src="./js/app.js"></script>
     <script src="./js/controllers/controllers.js"></script>
+    <script src="./js/services/services.js"></script>
+    <script src="./js/soundcloud/api.js"></script>
   </body>
 </html>
