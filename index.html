@@ -1,0 +1,29 @@
+<!doctype html>
+<html data-ng-app="startPage" data-ng-csp="">
+  <head>
+    <meta charset="UTF-8">
+    <title>Presently</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <div class="container">
+
+      <!-- Second row contains Time and Date -->
+     <div class="row">
+       <div class="datetime col-lg-6 col-lg-offset-3">
+         <div ng-controller="dateTimeController">
+           <h1 class="time"> {{date.raw | date:'HH:mm:ss'}} </h1>
+           <h3 class="date"> {{date.raw | date:' EEEE,  MMMM dd'}}
+         </div>
+       </div>
+     </div>
+
+
+    </div>
+    <script src="./js/vendor/angular.min.js"></script>
+    <script src="./js/vendor/angular-route.min.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/controllers/controllers.js"></script>
+  </body>
+</html>
