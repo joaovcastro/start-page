@@ -2,9 +2,14 @@
 <html data-ng-app="startPage" data-ng-csp="">
   <head>
     <meta charset="UTF-8">
-    <title>Presently</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+    <title>New Tab</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">  <!-- Font Awesome -->
+    <link href="css/owfont-regular.css" rel="stylesheet" type="text/css">    <!-- Weather Icons -->
+    <link href="css/style.css" rel="stylesheet" type="text/css">               <!-- Style -->
   </head>
   <body>
     <div class="container">
@@ -88,7 +93,7 @@
           <input type="text" id="todoInput" ng-model="todoTask" class="todo-input" placeholder="To do" onfocus="this.placeholder = ''"> </input>
         </form>
       </div>
-      
+
       <!-- Google Search -->
       <div class="col-lg-3 col-lg-offset-6 google-search" ng-controller="searchController">
         <form>
@@ -105,9 +110,11 @@
     <script src="./js/vendor/angular.min.js"></script>
     <script src="./js/vendor/angular-route.min.js"></script
     <script src="./js/vendor/bootstrap.min.js"></script>
+    <script src="./js/vendor/jquery-1.12.3.min.js"></script>
     <script src="./js/app.js"></script>
     <script src="./js/controllers/controllers.js"></script>
     <script src="./js/services/services.js"></script>
     <script src="./js/soundcloud/api.js"></script>
+
   </body>
 </html>

@@ -1,0 +1,134 @@
+/* General Aspects */
+body {
+  background-image: url("../img/wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right top;
+  background-attachment: fixed;
+  margin-top: 3%;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+::selection {
+
+  background: #ffb7b7; /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+  background: #ffb7b7; /* Gecko Browsers */
+}
+
+input:focus {
+  outline: none !important;
+}
+
+
+/* Soundcloud Widget */
+.soundcloud-widget{
+  position: absolute;
+  text-align: center;
+  left: 0px;
+}
+
+.player-button {
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border: 1px solid white;
+}
+
+.middle-button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.music-info {
+  color: white;
+  margin-top: 10px!important;
+}
+
+
+/* Weather Info */
+.weather-info {
+  text-align: center;
+  position: absolute;
+  right: 15px;
+}
+
+.weather-info i {
+  font-size: 20px;
+}
+
+.weather-info a {
+  color: white;
+  text-decoration: none;
+}
+
+.weather-info a:hover {
+  cursor: pointer;
+}
+
+/* Date and Time */
+.datetime{
+  position: fixed;
+  bottom: 25%;
+  text-align: center;
+}
+
+.time {
+  font-size: 100px;
+}
+
+.date {
+  margin-top: -2%;
+}
+
+
+/* Todo */
+.todo-list {
+   position: fixed;
+   bottom: 40px;
+   left: 40px;
+   padding-top: 1%;
+}
+
+.todo-list ul {
+  list-style-type: none;
+}
+
+.todo-input {
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0);
+  padding-left: 5px;
+  border-bottom: 1px solid white;
+}
+
+.todo-add {
+  border-radius: 100%;
+  background-color: rgba(200, 123, 111, 0);
+  color: white;
+  border: 1px solid white;
+}
+
+.todo-remove {
+  background-color: rgba(200, 123, 111, 0);
+  color: white;
+  border: none;
+}
+
+/* Google Search */
+.google-search {
+  position: absolute;
+  bottom: 40px;
+  right: -115px;
+}
+
+/* Settings */
+.modal {
+  color: black;
+}

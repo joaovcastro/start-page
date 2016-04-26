@@ -10,14 +10,24 @@
   ],
   "content_scripts": {
     "js" : [
-      "js/controllers/controllers.js"
+      "js/vendor/angular.min.js",
+      "js/vendor/bootstrap.min.js",
+      "js/vendor/angular-route.min.js",
+      "js/vendor/jquery-1.12.3.js",
+      "js/controllers/controllers.js",
+      "js/services/services.js"
     ]
   },
   "background": {
     "scripts": [
       "js/vendor/angular.min.js",
       "js/vendor/bootstrap.min.js",
-    ]
+      "js/vendor/angular-route.min.js",
+      "js/vendor/jquery-1.12.3.js",
+      "js/controllers/controllers.js",
+      "js/services/services.js"
+    ],
+    "persistent": false
   },
   "content_security_policy": "script-src 'self'; object-src 'self'",
   "chrome_url_overrides" : {
