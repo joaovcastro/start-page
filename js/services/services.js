@@ -15,4 +15,5 @@ angular.module('StartPage.services', [])
     });
   }
   return weatherAPI;
-});
+})
+;

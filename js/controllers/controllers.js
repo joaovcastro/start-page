@@ -1,8 +1,9 @@
-angular.module('StartPage.controllers', [])
+angular.module('StartPage.controllers', ['ngRoute'])
 
-// Controller for the Soundcloud widget
-.controller('playerController', function($scope) {
+.controller('homeController', function($scope, weatherAPIservice, $timeout, $location) {
 
+
+  // Controller for the Soundcloud widget
   var widget = SC.Widget(document.getElementById('soundcloud_widget'));
   var firstPlay = true;
 
@@ -59,9 +60,10 @@ angular.module('StartPage.controllers', [])
     widget.prev();
   }
 
-})
 
-.controller('weatherController', function($scope, weatherAPIservice){
+
+
+  // Weather Controller
   $scope.location = [];
 
   if (navigator.geolocation) {
@@ -89,9 +91,11 @@ angular.module('StartPage.controllers', [])
       });
     });
   }
-})
 
-.controller('dateTimeController', function($scope, $timeout) {
+
+
+
+  // Date and time controller
   // Build the date object
   $scope.date = {};
   // Update function
@@ -101,17 +105,11 @@ angular.module('StartPage.controllers', [])
   }
   // Kick off the update function
   updateTime();
-})
 
-// Controller for the To Do List
-.controller('todoController', function($scope, localStorageService) {
+
+  // Controller for the To Do List
   // Initialize Variables and get Information from localStorage
-  $scope.todoList = [];
-  if(!localStorageService.isSupported) {
-    alert("Your browser doesn't support local storage :/");
-  } else {
-    $scope.todoList = JSON.parse(localStorage.getItem('todo'));
-  }
+  $scope.todoList = JSON.parse(localStorage.getItem('todo'));
 
   // Add tasks to list
   $scope.addToList = function(text){
@@ -146,13 +144,62 @@ angular.module('StartPage.controllers', [])
     localStorage.setItem('todo', JSON.stringify($scope.todoList));
   }
 
-})
-
-.controller('searchController', function($scope, $window) {
+  // Controller for the google search
     $scope.searchQuery = '0';
     $scope.search = function(query) {
       var newQuery = query.replace(" ", "%20");
       $scope.searchQuery = 'http://www.google.com/search?q=' + newQuery;
       $window.location.href = $scope.searchQuery;
     }
+
+    changeTomato = function(view) {
+      console.log("entrou");
+      $location.path(view);
+    }
   })
+
+  .controller('pomodoroController', function($scope, $interval) {
+
+    var intervalId;
+    var restNum;
+
+    $scope.counter = 0;
+    $scope.initialCountdown = 1500;
+    $scope.countdown = $scope.initialCountdown;
+
+    $scope.timer = function(){
+      var startTime = new Date();
+      intervalId = $interval(function(){
+          var actualTime = new Date();
+          $scope.counter = Math.floor((actualTime - startTime) / 1000);
+          $scope.countdown = $scope.initialCountdown - $scope.counter;
+      }, 1000);
+    };
+
+    $scope.$watch('countdown', function(countdown){
+      if (countdown === 0){
+        $scope.stopPomodoro();
+      }
+    });
+
+    $scope.startPomodoro = function() {
+       $scope.timer();
+    };
+
+    $scope.stopPomodoro = function() {
+      $interval.cancel(intervalId);
+      $scope.countdown = $scope.initialCountdown = 1500;
+    }
+
+    $scope.pausePomodoro = function(){
+	     $interval.cancel(intervalId);
+    };
+  })
+
+
+  .filter('secondsToDateTime', [function() {
+    return function(seconds) {
+        return new Date(1970, 0, 1).setSeconds(seconds);
+    };
+  }])
+;
