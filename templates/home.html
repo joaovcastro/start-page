@@ -15,11 +15,16 @@
     <div class="pomodoro col-lg-4 col-lg-offset-4" ng-controller="pomodoroController">
       <button class="btn btn-primary" ng-click="startPomodoro()"> start pomodoro </button>
       <div class="timer-box">
-        <div> Work for: {{countdown | secondsToDateTime | date:'HH:mm:ss'}}</div>
-        <div> Rest for: {{countdown | secondsToDateTime | date:'HH:mm:ss'}}</div>
+        <div ng-if="work">
+          <h4> Work for </h4>
+        </div>
+        <div ng-if="break">
+          <h4> Take a break for </h4>
+        </div>
+        <div>{{countdown | secondsToDateTime | date:'HH:mm:ss'}}</div>
         <button class="btn btn-primary" ng-click="startPomodoro()"> start  </button>
-        <button class="btn btn-primary" ng-click="stopPomodoro()"> reset  </button>
-        <button class="btn btn-primary" ng-click="pausePomodoro()"> stop  </button>
+        <button class="btn btn-primary" ng-click="stopPomodoro()"> stop  </button>
+        <button class="btn btn-primary" ng-click="pausePomodoro()"> pause  </button>
 
       </div>
     </div>

@@ -163,32 +163,61 @@ angular.module('StartPage.controllers', ['ngRoute'])
     var intervalId;
     var restNum;
 
+    $scope.work = true;
+    $scope.break = false;
+
     $scope.counter = 0;
     $scope.initialCountdown = 1500;
+
+    //////////
+    var workTime = 1500;
+    var smallBreakTime = 300;
+    var bigBreakTime = 900;
+    var breakNum = 0;
+    var first = true;
+
+
+    //////////
     $scope.countdown = $scope.initialCountdown;
 
-    $scope.timer = function(){
+    $scope.timer = function(timeInterval){
       var startTime = new Date();
       intervalId = $interval(function(){
           var actualTime = new Date();
           $scope.counter = Math.floor((actualTime - startTime) / 1000);
-          $scope.countdown = $scope.initialCountdown - $scope.counter;
+          console.log("time interval: " + timeInterval);
+          $scope.countdown = timeInterval - $scope.counter;
       }, 1000);
     };
 
     $scope.$watch('countdown', function(countdown){
       if (countdown === 0){
         $scope.stopPomodoro();
+        if ($scope.work) {
+          $scope.work = false;
+          $scope.break =true;
+          if(breakNum === 4) {
+            $scope.timer(bigBreakTime);
+            breakNum = 0;
+          }
+          $scope.timer(smallBreakTime);
+
+        } else {
+          breakNum++;
+          $scope.timer(workTime);
+        }
       }
     });
 
-    $scope.startPomodoro = function() {
-       $scope.timer();
+    $scope.startPomodoro = function(timeInterval) {
+      if (first)
+        timeInterval = $scope.initialCountdown;
+      $scope.timer(timeInterval);
     };
 
     $scope.stopPomodoro = function() {
       $interval.cancel(intervalId);
-      $scope.countdown = $scope.initialCountdown = 1500;
+      $scope.countdown = $scope.initialCountdown;
     }
 
     $scope.pausePomodoro = function(){
