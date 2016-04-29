@@ -1,6 +1,6 @@
 angular.module('StartPage.controllers', ['ngRoute'])
 
-.controller('homeController', function($scope, weatherAPIservice, $timeout, $location) {
+.controller('homeController', function($scope, weatherAPIservice, $timeout, $location, $window) {
 
 
   // Controller for the Soundcloud widget
@@ -158,18 +158,17 @@ angular.module('StartPage.controllers', ['ngRoute'])
     }
   })
 
-  .controller('pomodoroController', function($scope, $interval) {
+  .controller('pomodoroController', function($scope, $interval, $sce) {
+
+    $scope.showTimer = false;
+    $scope.work = true;
+    $scope.break = false;
+    $scope.counter = 0;
+    $scope.initialCountdown = 1500;
+    $scope.countdown = $scope.initialCountdown;
 
     var intervalId;
     var restNum;
-
-    $scope.work = true;
-    $scope.break = false;
-
-    $scope.counter = 0;
-    $scope.initialCountdown = 1500;
-
-    //////////
     var workTime = 1500;
     var smallBreakTime = 300;
     var bigBreakTime = 900;
@@ -177,33 +176,40 @@ angular.module('StartPage.controllers', ['ngRoute'])
     var first = true;
 
 
-    //////////
-    $scope.countdown = $scope.initialCountdown;
+    $scope.togglePomodoro = function() {
+      $scope.showTimer = !$scope.showTimer;
+    }
+
 
     $scope.timer = function(timeInterval){
       var startTime = new Date();
       intervalId = $interval(function(){
           var actualTime = new Date();
           $scope.counter = Math.floor((actualTime - startTime) / 1000);
-          console.log("time interval: " + timeInterval);
           $scope.countdown = timeInterval - $scope.counter;
       }, 1000);
     };
 
     $scope.$watch('countdown', function(countdown){
-      if (countdown === 0){
+      if (countdown == 0){
+        playNg2();
         $scope.stopPomodoro();
         if ($scope.work) {
           $scope.work = false;
           $scope.break =true;
           if(breakNum === 4) {
-            $scope.timer(bigBreakTime);
+            console.log("big break");
             breakNum = 0;
+            $scope.countdown = bigBreakTime;
+            $scope.timer(bigBreakTime);
+          } else {
+            $scope.countdown = smallBreakTime;
+            $scope.timer(smallBreakTime);
           }
-          $scope.timer(smallBreakTime);
-
         } else {
           breakNum++;
+          $scope.work = true;
+          $scope.break = false;
           $scope.timer(workTime);
         }
       }
@@ -222,7 +228,15 @@ angular.module('StartPage.controllers', ['ngRoute'])
 
     $scope.pausePomodoro = function(){
 	     $interval.cancel(intervalId);
+    }
+
+    playNg2 = function () {
+        var audio = document.getElementById("audioNg2");
+        audio.load();
+        audio.play();
     };
+
+
   })
 
 
@@ -231,4 +245,5 @@ angular.module('StartPage.controllers', ['ngRoute'])
         return new Date(1970, 0, 1).setSeconds(seconds);
     };
   }])
+
 ;

@@ -47,6 +47,8 @@ input:focus {
   margin-right: 10px;
 }
 
+
+
 .music-info {
   color: white;
   margin-top: 10px!important;
@@ -78,13 +80,37 @@ input:focus {
   text-align: center;
 }
 
-.timer-box {
+.tomato {
+  width: 40px;
+  padding: 5px;
+}
+
+.tomato-btn{
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+
+}
+
+.minimal-btn {
+  background-color: rgba(255, 255, 255, 0);
   border: 1px solid white;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.timer-box {
   text-align: center;
   margin-top: 2%;
-  padding-top: 5%;
   padding-bottom: 5%;
+}
 
+.timer-box h4 {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 /* Date and Time */
@@ -137,9 +163,10 @@ input:focus {
 
 /* Google Search */
 .google-search {
+  text-align: right;
   position: absolute;
   bottom: 40px;
-  right: -60px;
+  right: 20px;
 }
 
 /* Settings */

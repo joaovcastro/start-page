@@ -13,21 +13,28 @@
     </div>
 
     <div class="pomodoro col-lg-4 col-lg-offset-4" ng-controller="pomodoroController">
-      <button class="btn btn-primary" ng-click="startPomodoro()"> start pomodoro </button>
-      <div class="timer-box">
+      <button class="tomato-btn" ng-click="togglePomodoro()"> <img class="tomato" src="./img/tomato.png"> </button>
+      <div ng-if="showTimer" class="timer-box ">
         <div ng-if="work">
-          <h4> Work for </h4>
+          <h3> Work for </h3>
         </div>
         <div ng-if="break">
-          <h4> Take a break for </h4>
+          <h3> Take a break for </h3>
         </div>
-        <div>{{countdown | secondsToDateTime | date:'HH:mm:ss'}}</div>
-        <button class="btn btn-primary" ng-click="startPomodoro()"> start  </button>
-        <button class="btn btn-primary" ng-click="stopPomodoro()"> stop  </button>
-        <button class="btn btn-primary" ng-click="pausePomodoro()"> pause  </button>
+        <h4>{{countdown | secondsToDateTime | date:'HH:mm:ss'}}</h4>
+
+        <audio id="audioNg2">
+          <source src="./audio/beep.ogg" type="audio/ogg"></source>
+        </audio>
+
+        <button class="minimal-btn" ng-click="startPomodoro()"> start  </button>
+        <button class="minimal-btn" ng-click="stopPomodoro()"> stop  </button>
+
+
 
       </div>
     </div>
+
     <!-- Weather -->
     <div class="weather-info col-lg-1 col-lg-offset-7">
       <a data-toggle="modal" data-target="#weather-complete">
@@ -39,14 +46,11 @@
 
   </div>
 
-
-
   <!-- Second row contains Time and Date -->
   <div class="row datetime col-lg-6 col-lg-offset-3">
-   <h1 class="time"> {{date.raw | date:'HH:mm:ss'}} </h1>
-   <h3 class="date"> {{date.raw | date:' EEEE,  MMMM dd'}}
+     <h1 class="time"> {{date.raw | date:'HH:mm:ss'}} </h1>
+     <h3 class="date"> {{date.raw | date:' EEEE,  MMMM dd'}}
   </div>
-
 
   <!-- Full Weather Info -->
   <div class="modal fade" id="weather-complete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

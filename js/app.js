@@ -2,10 +2,9 @@
 
 
 
-angular.module('startPage', ['StartPage.controllers', 'StartPage.services', 'ngRoute'])
+angular.module('startPage', ['StartPage.controllers', 'StartPage.services', 'ngRoute', 'ngAnimate'])
 
 .config(function($routeProvider) {
-  console.log($routeProvider);
   $routeProvider
     .when('/', {
       templateUrl: 'templates/home.html',
