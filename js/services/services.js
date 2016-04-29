@@ -8,7 +8,7 @@ angular.module('StartPage.services', [])
   weatherAPI.getInfo = function(position) {
     var request =  'http://api.openweathermap.org/data/2.5/weather?lat=' + position.coords.latitude +
          '&lon=' + position.coords.longitude +
-         '&appid=' + APIkey;
+         '&appid=' + APIkey + "&units=metric";
     return $http({
       method: 'GET',
       url: request

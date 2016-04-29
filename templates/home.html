@@ -39,7 +39,7 @@
     <div class="weather-info col-lg-1 col-lg-offset-7">
       <a data-toggle="modal" data-target="#weather-complete">
         <i class="owf owf-{{weatherInfo.weather[0].id}}"></i>
-        <p> {{weatherInfo.main.temp - 272.15 | number : 0}}ºC
+        <p> {{weatherInfo.main.temp | number : 0}}ºC
         <br> {{weatherInfo.weather[0].description}} </p>
       </a>
     </div>
